@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGAH Mustami Lantai 5 — Asrama Persahabatan</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --glass-bg:rgba(255,255,255,0.78);
+    --glass-border:rgba(255,255,255,0.5);
+    --glass-shadow:0 8px 32px rgba(0,0,0,0.1);
+    --ink:#1a1f16;
+    --ink-soft:#4a5040;
+    --green:#1B5E20;
+    --green-light:#2E7D32;
+    --green-glow:rgba(27,94,32,0.18);
+    --blue:#1565C0;
+    --blue-light:#42A5F5;
+    --blue-glow:rgba(21,101,192,0.18);
+    --gold:#C8A415;
+    --gold-light:#E8C547;
+    --gold-glow:rgba(200,164,21,0.2);
+    --red:#B71C1C;
+    --orange:#E65100;
+    --purple:#6A1B9A;
+    --teal:#00695C;
+    --line:rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      linear-gradient(135deg, rgba(10,40,10,0.88) 0%, rgba(5,25,8,0.92) 100%),
+      url('https://images.unsplash.com/photo-1564121211835-e88c852648ab?w=1920&q=80');
+    background-size:cover; background-attachment:fixed; background-position:center;
+    color:var(--ink); font-family:'IBM Plex Sans', sans-serif;
+    padding:28px 20px 60px; min-height:100vh;
+  }
+  .wrap{max-width:1200px; margin:0 auto;}
+
+  /* HEADER */
+  header{
+    text-align:center; padding-bottom:20px; margin-bottom:16px;
+  }
+  .brand-mark{
+    width:64px; height:64px; border-radius:18px;
+    background:linear-gradient(135deg, var(--green), var(--blue));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.25); font-size:32px;
+    margin:0 auto 14px;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:30px;
+    letter-spacing:-0.02em; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.3);
+    margin-bottom:4px;
+  }
+  .subtitle{color:rgba(255,255,255,0.7); font-size:14px; font-weight:500;}
+  .asrama-badge{
+    display:inline-block; margin-top:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:11px;
+    color:rgba(255,255,255,0.85); background:var(--glass-bg);
+    border:1px solid var(--glass-border); padding:6px 16px; border-radius:24px;
+    backdrop-filter:blur(12px); box-shadow:var(--glass-shadow);
+  }
+
+  /* TAB NAV */
+  .tab-nav{
+    display:flex; justify-content:center; gap:8px; margin-bottom:24px; flex-wrap:wrap;
+  }
+  .tab-btn{
+    padding:10px 24px; border-radius:14px;
+    font-family:'IBM Plex Sans', sans-serif; font-size:14px; font-weight:700;
+    cursor:pointer; transition:all .2s; border:none;
+    background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.7);
+    backdrop-filter:blur(8px);
+  }
+  .tab-btn:hover{background:rgba(255,255,255,0.25); color:#fff;}
+  .tab-btn.active{
+    background:var(--glass-bg); color:var(--ink);
+    box-shadow:var(--glass-shadow); border:1px solid var(--glass-border);
+  }
+
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block; animation:fadeIn .4s ease;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+  /* GLASS */
+  .glass{
+    background:var(--glass-bg); border:1px solid var(--glass-border);
+    border-radius:18px; padding:22px;
+    backdrop-filter:blur(16px); box-shadow:var(--glass-shadow);
+  }
+  .glass h2, .glass h3{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    color:var(--ink); margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.12em;
+    text-transform:uppercase; color:rgba(255,255,255,0.6); margin:28px 0 12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-label::after{content:''; flex:1; height:1px; background:rgba(255,255,255,0.2);}
+
+  /* ====== ORGANIGRAM ====== */
+  .org-wrap{display:flex; flex-direction:column; align-items:center; position:relative;}
+  .org-card{
+    background:var(--glass-bg); border:1px solid var(--glass-border);
+    border-radius:16px; padding:18px 28px; min-width:240px; max-width:300px;
+    backdrop-filter:blur(16px); box-shadow:var(--glass-shadow);
+    text-align:center; transition:all .25s ease; position:relative; z-index:2;
+  }
+  .org-card:hover{transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.15);}
+  .org-card .avatar{
+    width:52px; height:52px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; margin:0 auto 10px;
+    background:linear-gradient(135deg, var(--green), var(--green-light));
+    color:#fff; box-shadow:0 4px 12px var(--green-glow);
+  }
+  .org-card .avatar.blue{background:linear-gradient(135deg, var(--blue), var(--blue-light)); box-shadow:0 4px 12px var(--blue-glow);}
+  .org-card .avatar.gold{background:linear-gradient(135deg, var(--gold), var(--gold-light)); box-shadow:0 4px 12px var(--gold-glow); color:var(--ink);}
+  .org-card .avatar.teal{background:linear-gradient(135deg, var(--teal), #00897B); box-shadow:0 4px 12px rgba(0,105,92,0.2);}
+  .org-card .avatar.purple{background:linear-gradient(135deg, var(--purple), #AB47BC); box-shadow:0 4px 12px rgba(106,27,154,0.2);}
+  .org-card .avatar.red{background:linear-gradient(135deg, var(--red), #EF5350); box-shadow:0 4px 12px rgba(183,28,28,0.2);}
+  .org-card .avatar.orange{background:linear-gradient(135deg, var(--orange), #FF9800); box-shadow:0 4px 12px rgba(230,81,0,0.2); color:#fff;}
+  .org-card .jabatan{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:4px;
+  }
+  .org-card .nama{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; color:var(--ink); line-height:1.3;
+  }
+  .v-line{width:2px; height:24px; background:rgba(255,255,255,0.3); position:relative; z-index:1;}
+  .level-row{
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+    width:100%; position:relative;
+  }
+  .level-row .org-card{flex:1; min-width:180px; max-width:260px;}
+  .card-stem{width:2px; height:18px; background:rgba(255,255,255,0.3); margin:0 auto;}
+  .group-label{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.15em;
+    text-transform:uppercase; color:rgba(255,255,255,0.5); text-align:center; margin-bottom:6px;
+  }
+  .stats-row{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; text-align:center;
+  }
+  .stat-box{
+    background:rgba(255,255,255,0.4); border-radius:12px; padding:16px;
+  }
+  .stat-box .stat-num{font-family:'Space Grotesk'; font-size:26px; font-weight:700;}
+  .stat-box .stat-label{font-size:12px; color:var(--ink-soft); margin-top:4px;}
+  .quote-box{
+    text-align:center; padding:28px 20px;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+    border-radius:18px; margin-top:16px; backdrop-filter:blur(8px);
+  }
+  .quote-box p{font-family:'Space Grotesk'; font-size:17px; font-weight:600; color:rgba(255,255,255,0.9); font-style:italic; line-height:1.6;}
+  .quote-box span{display:block; margin-top:8px; color:rgba(255,255,255,0.5); font-size:12px; font-family:'IBM Plex Mono';}
+
+  /* ====== KEHADIRAN ====== */
+  .form-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center;}
+  .form-row input, .form-row select{
+    padding:12px 16px; border-radius:14px;
+    border:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.7);
+    font-family:'IBM Plex Sans', sans-serif; font-size:14px; color:var(--ink); outline:none;
+    transition:all .2s;
+  }
+  .form-row input{flex:1; min-width:180px;}
+  .form-row input:focus, .form-row select:focus{border-color:var(--green); background:#fff; box-shadow:0 0 0 4px var(--green-glow);}
+  .form-row select{width:140px; cursor:pointer;}
+
+  .btn{
+    padding:12px 22px; border-radius:14px; font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px; font-weight:700; cursor:pointer; transition:all .2s;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none;
+  }
+  .btn-green{background:linear-gradient(135deg, var(--green), var(--green-light)); color:#fff; box-shadow:0 4px 16px var(--green-glow);}
+  .btn-green:hover{transform:translateY(-2px);}
+  .btn-blue{background:linear-gradient(135deg, var(--blue), var(--blue-light)); color:#fff; box-shadow:0 4px 16px var(--blue-glow);}
+  .btn-blue:hover{transform:translateY(-2px);}
+  .btn-gold{background:linear-gradient(135deg, var(--gold), var(--gold-light)); color:#1a1f16; box-shadow:0 4px 16px rgba(200,164,21,0.25);}
+  .btn-gold:hover{transform:translateY(-2px);}
+  .btn-red{background:linear-gradient(135deg, var(--red), #D32F2F); color:#fff;}
+  .btn-red:hover{transform:translateY(-2px);}
+  .btn-sec{background:rgba(255,255,255,0.6); color:var(--ink-soft); border:1px solid rgba(0,0,0,0.1);}
+  .btn-sec:hover{background:#fff;}
+
+  .kehadiran-stats-row{
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-bottom:20px;
+  }
+  .kehadiran-stat-box{
+    background:rgba(255,255,255,0.5); border:1px solid rgba(0,0,0,0.06);
+    border-radius:14px; padding:16px 10px; text-align:center;
+  }
+  .kehadiran-stat-box .stat-num{font-family:'Space Grotesk'; font-size:22px; font-weight:700;}
+  .kehadiran-stat-box .stat-label{font-size:11px; color:var(--ink-soft); margin-top:4px;}
+
+  .gender-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .gender-panel{
+    background:rgba(255,255,255,0.5); border:1px solid rgba(0,0,0,0.06);
+    border-radius:16px; padding:18px;
+  }
+  .gender-panel h4{
+    font-family:'Space Grotesk', sans-serif; font-size:15px; font-weight:700;
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .gender-panel.banin h4{color:var(--green);}
+  .gender-panel.banat h4{color:var(--blue);}
+
+  .mustami-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;
+  }
+  .mustami-card{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.6); border:1px solid rgba(0,0,0,0.06);
+    border-radius:12px; padding:10px 12px; cursor:pointer; transition:all .2s;
+  }
+  .mustami-card:hover{background:rgba(255,255,255,0.9); transform:translateY(-2px);}
+  .mustami-card.checked{background:rgba(27,94,32,0.1); border-color:rgba(27,94,32,0.25);}
+  .mustami-card.checked-banat{background:rgba(21,101,192,0.1); border-color:rgba(21,101,192,0.25);}
+  .mustami-card.absen-alpha{background:rgba(183,28,28,0.06); border-color:rgba(183,28,28,0.15);}
+  .mustami-card.absen-sakit{background:rgba(230,81,0,0.06); border-color:rgba(230,81,0,0.15);}
+  .mustami-card.absen-izin{background:rgba(106,27,154,0.06); border-color:rgba(106,27,154,0.15);}
+
+  .mustami-card input[type="checkbox"]{
+    width:20px; height:20px; accent-color:var(--green); flex-shrink:0; cursor:pointer;
+  }
+  .mustami-card.banat input[type="checkbox"]{accent-color:var(--blue);}
+  .mustami-card .m-name{font-weight:600; font-size:13px; color:var(--ink); flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .mustami-card .m-time{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); flex-shrink:0;}
+  .ket-select{
+    font-size:11px; padding:4px 8px; border-radius:8px; border:1px solid rgba(0,0,0,0.1);
+    background:rgba(255,255,255,0.8); color:var(--ink); font-family:'IBM Plex Sans', sans-serif;
+    cursor:pointer; outline:none; flex-shrink:0;
+  }
+  .ket-select:focus{border-color:var(--gold);}
+  .mustami-card .m-del{
+    opacity:0; color:var(--red); font-size:18px; cursor:pointer; transition:opacity .2s; padding:2px; flex-shrink:0;
+  }
+  .mustami-card:hover .m-del{opacity:0.6;}
+  .mustami-card:hover .m-del:hover{opacity:1;}
+
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  thead th{
+    text-align:left; font-family:'IBM Plex Mono', monospace; font-weight:600;
+    font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--ink-soft); padding:10px 12px; border-bottom:2px solid var(--green);
+  }
+  .table-banat thead th{border-bottom-color:var(--blue);}
+  .table-tidak thead th{border-bottom-color:var(--red);}
+  tbody td{padding:10px 12px; border-bottom:1px solid var(--line);}
+  tbody tr:hover{background:rgba(27,94,32,0.04);}
+  .table-banat tbody tr:hover{background:rgba(21,101,192,0.04);}
+  .table-tidak tbody tr:hover{background:rgba(183,28,28,0.04);}
+  tbody tr:nth-child(even){background:rgba(0,0,0,0.02);}
+  .badge-hadir{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:4px 12px; border-radius:20px; font-weight:700; font-size:12px;
+  }
+  .badge-banin{background:rgba(27,94,32,0.12); color:var(--green);}
+  .badge-banat{background:rgba(21,101,192,0.12); color:var(--blue);}
+  .badge-alpha{background:rgba(183,28,28,0.12); color:var(--red);}
+  .badge-sakit{background:rgba(230,81,0,0.12); color:var(--orange);}
+  .badge-izin{background:rgba(106,27,154,0.12); color:var(--purple);}
+  .td-num{font-family:'IBM Plex Mono', monospace; font-weight:600; color:var(--ink-soft); width:36px;}
+  .td-name{font-weight:600;}
+  .td-time{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:12px;}
+  .td-action{cursor:pointer; color:var(--red); font-size:18px; opacity:0.6; transition:opacity .2s;}
+  .td-action:hover{opacity:1;}
+
+  .laporan-split{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .laporan-panel{background:rgba(255,255,255,0.4); border-radius:14px; padding:16px;}
+  .laporan-panel h4{font-family:'Space Grotesk', sans-serif; font-size:14px; font-weight:700; margin-bottom:12px;}
+  .laporan-panel.banin-lap h4{color:var(--green);}
+  .laporan-panel.banat-lap h4{color:var(--blue);}
+  .laporan-panel.tidak-lap h4{color:var(--red);}
+
+  .empty-state{text-align:center; padding:30px 16px; color:var(--ink-soft); font-size:13px;}
+
+  .toast-container{position:fixed; top:20px; right:20px; z-index:1000; display:flex; flex-direction:column; gap:10px;}
+  .toast{
+    background:var(--ink); color:#fff; padding:14px 20px; border-radius:14px;
+    font-size:13px; font-weight:500; box-shadow:0 8px 32px rgba(0,0,0,0.2);
+    display:flex; align-items:center; gap:10px; min-width:280px; animation:slideIn .3s ease;
+  }
+  .toast.success{background:var(--green);}
+  @keyframes slideIn{from{opacity:0; transform:translateX(50px);} to{opacity:1; transform:translateX(0);}}
+
+  footer{margin-top:40px; text-align:center; color:rgba(255,255,255,0.45); font-size:12px;}
+
+  @media(max-width:900px){
+    .gender-grid{grid-template-columns:1fr;}
+    .laporan-split{grid-template-columns:1fr;}
+    .kehadiran-stats-row{grid-template-columns:repeat(3, 1fr);}
+    .mustami-grid{grid-template-columns:1fr;}
+    .stats-row{grid-template-columns:repeat(2, 1fr);}
+    .level-row{flex-direction:column; align-items:center;}
+    .level-row .org-card{width:100%; max-width:100%;}
+  }
+  @media(max-width:500px){
+    .form-row input{min-width:100%;}
+    .form-row select{width:100%;}
+    .kehadiran-stats-row{grid-template-columns:repeat(2, 1fr);}
+    h1{font-size:22px;}
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand-mark">🕌</div>
+    <h1>SIGAH MUSTAMI LANTAI 5</h1>
+    <p class="subtitle">Asrama Persahabatan — Majelis Taklim</p>
+    <div class="asrama-badge">📍 Lantai 5 — Tahun Akademik 2026/2027</div>
+  </header>
+
+  <!-- TAB NAVIGATION -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('struktural')" id="tab-struktural">🏛️ Struktural</button>
+    <button class="tab-btn" onclick="switchTab('kehadiran')" id="tab-kehadiran">📋 Kehadiran</button>
+  </div>
+
+  <!-- ====== PANEL STRUKTURAL ====== -->
+  <div class="tab-panel active" id="panel-struktural">
+
+    <div class="section-label">Struktur Organisasi</div>
+    <div class="glass">
+      <div class="org-wrap">
+        <div class="org-card">
+          <div class="avatar gold">👑</div>
+          <div class="jabatan">Penjab Lantai</div>
+          <div class="nama">Nurkholik Akbar</div>
+        </div>
+        <div class="v-line"></div>
+        <div class="org-card">
+          <div class="avatar blue">🤝</div>
+          <div class="jabatan">Wakil Penjab</div>
+          <div class="nama">Fika Mazayatus</div>
+        </div>
+        <div class="v-line"></div>
+        <div class="group-label">📋 Sekretariat</div>
+        <div class="level-row">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar teal">📝</div>
+              <div class="jabatan">Sekretaris 1</div>
+              <div class="nama">Zahran Firdaus</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar teal">📋</div>
+              <div class="jabatan">Sekretaris 2</div>
+              <div class="nama">Keyla Sarifa</div>
+            </div>
+          </div>
+        </div>
+        <div class="v-line"></div>
+        <div class="group-label">📚 Kurikulum</div>
+        <div class="level-row">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar purple">📚</div>
+              <div class="jabatan">Kurikulum 1</div>
+              <div class="nama">Shofi Alfathonah</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar purple">📖</div>
+              <div class="jabatan">Kurikulum 2</div>
+              <div class="nama">Satria Husni</div>
+            </div>
+          </div>
+        </div>
+        <div class="v-line"></div>
+        <div class="group-label">🛡️ Kedisiplinan</div>
+        <div class="level-row">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar red">🛡️</div>
+              <div class="jabatan">Kedisiplinan 1</div>
+              <div class="nama">Shufwan Riza</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar red">🛡️</div>
+              <div class="jabatan">Kedisiplinan 2</div>
+              <div class="nama">Khoirun Nisa</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar orange">🛡️</div>
+              <div class="jabatan">Kedisiplinan 3</div>
+              <div class="nama">Fahri Azhar</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="card-stem"></div>
+            <div class="org-card">
+              <div class="avatar orange">🛡️</div>
+              <div class="jabatan">Kedisiplinan 4</div>
+              <div class="nama">Firda Aulia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Ringkasan Struktural</div>
+    <div class="glass">
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--gold);">10</div>
+          <div class="stat-label">Total Pengurus</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--green);">5</div>
+          <div class="stat-label">Bidang</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--red);">4</div>
+          <div class="stat-label">Kedisiplinan</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--purple);">2</div>
+          <div class="stat-label">Kurikulum</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <p>"Bersama-sama kita membangun suasana keilmuan dan keakraban di Lantai 5 Asrama Persahabatan."</p>
+      <span>— STRUKTURAL MUSTAMI LANTAI 5</span>
+    </div>
+
+  </div>
+
+  <!-- ====== PANEL KEHADIRAN ====== -->
+  <div class="tab-panel" id="panel-kehadiran">
+
+    <div class="glass">
+      <h3>➕ Tambah Nama Mustami</h3>
+      <div class="form-row">
+        <input type="text" id="inputNama" placeholder="Ketik nama mustami..." onkeydown="if(event.key==='Enter')tambahNama()">
+        <select id="inputGender">
+          <option value="banin">👦 Banin</option>
+          <option value="banat">👧 Banat</option>
+        </select>
+        <button class="btn btn-green" onclick="tambahNama()">Tambah</button>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-sec" onclick="importDefault()">📥 Muat Daftar Default</button>
+        <button class="btn btn-sec" onclick="resetHariIni()">🔄 Reset Kehadiran Hari Ini</button>
+        <button class="btn btn-sec" onclick="resetSemua()">🗑️ Hapus Semua Data</button>
+      </div>
+    </div>
+
+    <div class="section-label">Daftar Mustami — Centang yang Hadir, Pilih Keterangan jika Tidak Hadir</div>
+    <div class="glass">
+      <div class="kehadiran-stats-row">
+        <div class="kehadiran-stat-box stat-total"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Mustami</div></div>
+        <div class="kehadiran-stat-box stat-banin"><div class="stat-num" id="statBanin">0</div><div class="stat-label">Banin Hadir</div></div>
+        <div class="kehadiran-stat-box stat-banat"><div class="stat-num" id="statBanat">0</div><div class="stat-label">Banat Hadir</div></div>
+        <div class="kehadiran-stat-box stat-tidak"><div class="stat-num" id="statTidak">0</div><div class="stat-label">Tidak Hadir</div></div>
+        <div class="kehadiran-stat-box stat-persen"><div class="stat-num" id="statPersen">0%</div><div class="stat-label">Persentase Hadir</div></div>
+      </div>
+      <div class="gender-grid">
+        <div class="gender-panel banin">
+          <h4>👦 Banin (Laki-laki)</h4>
+          <div class="mustami-grid" id="gridBanin"></div>
+        </div>
+        <div class="gender-panel banat">
+          <h4>👧 Banat (Perempuan)</h4>
+          <div class="mustami-grid" id="gridBanat"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Laporan Kehadiran Hari Ini</div>
+    <div class="glass">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+        <h3 style="margin:0;">📋 Tabel Kehadiran</h3>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-gold" onclick="window.print()">🖨️ Print</button>
+          <button class="btn btn-sec" onclick="exportCSV()">📄 Export CSV</button>
+        </div>
+      </div>
+      <div class="laporan-split">
+        <div class="laporan-panel banin-lap">
+          <h4>👦 Laporan Banin Hadir</h4>
+          <div id="tableBanin"></div>
+        </div>
+        <div class="laporan-panel banat-lap">
+          <h4>👧 Laporan Banat Hadir</h4>
+          <div id="tableBanat"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Laporan Tidak Hadir</div>
+    <div class="glass">
+      <div class="laporan-split">
+        <div class="laporan-panel tidak-lap">
+          <h4>👦 Banin Tidak Hadir</h4>
+          <div id="tableBaninTidak"></div>
+        </div>
+        <div class="laporan-panel tidak-lap">
+          <h4>👧 Banat Tidak Hadir</h4>
+          <div id="tableBanatTidak"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    SIGAH Mustami Lantai 5 · Asrama Persahabatan · Data tersimpan otomatis di browser
+  </footer>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ====== TAB SWITCHING ======
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+  if(tab === 'kehadiran') renderAll();
+}
+
+// ====== KEHADIRAN STATE ======
+const STORAGE_KEY = 'sigahMustami_L5_v1';
+
+const DEFAULT_NAMES = [
+  {nama:"Ahmad Fauzi", gender:"banin"},{nama:"Budi Santoso", gender:"banin"},{nama:"Candra Wijaya", gender:"banin"},
+  {nama:"Dedi Kurniawan", gender:"banin"},{nama:"Eko Prasetyo", gender:"banin"},{nama:"Fajar Nugroho", gender:"banin"},
+  {nama:"Gunawan", gender:"banin"},{nama:"Hadi Sucipto", gender:"banin"},{nama:"Irfan Maulana", gender:"banin"},
+  {nama:"Joko Susilo", gender:"banin"},{nama:"Kurniawan", gender:"banin"},{nama:"Lukman Hakim", gender:"banin"},
+  {nama:"Mulyadi", gender:"banin"},{nama:"Nur Hidayat", gender:"banin"},{nama:"Oky Firmansyah", gender:"banin"},
+  {nama:"Purnomo", gender:"banin"},{nama:"Qomaruddin", gender:"banin"},{nama:"Rudi Hartono", gender:"banin"},
+  {nama:"Samsul Arifin", gender:"banin"},{nama:"Taufik Hidayat", gender:"banin"},{nama:"Umar Faruq", gender:"banin"},
+  {nama:"Vikri Abdullah", gender:"banin"},{nama:"Wahyu Setiawan", gender:"banin"},{nama:"Yusuf Mansur", gender:"banin"},
+  {nama:"Zainal Abidin", gender:"banin"},
+  {nama:"Aisyah Putri", gender:"banat"},{nama:"Bella Rahma", gender:"banat"},{nama:"Citra Lestari", gender:"banat"},
+  {nama:"Dewi Sartika", gender:"banat"},{nama:"Eka Nuraini", gender:"banat"},{nama:"Fitriani", gender:"banat"},
+  {nama:"Gita Permata", gender:"banat"},{nama:"Hani Fauziah", gender:"banat"},{nama:"Indah Sari", gender:"banat"},
+  {nama:"Jihan Aulia", gender:"banat"},{nama:"Kirana Dewi", gender:"banat"},{nama:"Laila Maghfiroh", gender:"banat"},
+  {nama:"Maya Sari", gender:"banat"},{nama:"Nadia Zahra", gender:"banat"},{nama:"Olivia Putri", gender:"banat"},
+  {nama:"Putri Anggraini", gender:"banat"},{nama:"Qonita Salma", gender:"banat"},{nama:"Rina Amelia", gender:"banat"},
+  {nama:"Siti Aminah", gender:"banat"},{nama:"Tika Ramadhani", gender:"banat"},{nama:"Ulfah Nur", gender:"banat"},
+  {nama:"Vina Maulida", gender:"banat"},{nama:"Winda Ayu", gender:"banat"},{nama:"Yuni Safitri", gender:"banat"},
+  {nama:"Zahra Khairunnisa", gender:"banat"}
+];
+
+function loadState(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved) {
+      const parsed = JSON.parse(saved);
+      if(parsed.today) {
+        for(const key in parsed.today) {
+          if(Array.isArray(parsed.today[key])) {
+            parsed.today[key] = { hadir: parsed.today[key], absen: [] };
+          }
+        }
+      }
+      if(!parsed.absen) parsed.absen = {};
+      return parsed;
+    }
+  }catch(e){ console.error('loadState error', e); }
+  return { names: [], today: {}, absen: {} };
+}
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+}
+let appState = loadState();
+
+function getTodayKey(){
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function formatDate(){
+  const now = new Date();
+  const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  return hari[now.getDay()] + ', ' + now.getDate() + ' ' + bulan[now.getMonth()] + ' ' + now.getFullYear();
+}
+function formatTime(){
+  const now = new Date();
+  return String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+}
+function showToast(msg){
+  const c = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast success';
+  t.innerHTML = '✅ ' + msg;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0'; t.style.transform='translateX(50px)'; setTimeout(()=>t.remove(),300);}, 3000);
+}
+
+function getTodayData(){
+  const todayKey = getTodayKey();
+  if(!appState.today[todayKey]) appState.today[todayKey] = { hadir: [], absen: [] };
+  if(!appState.absen[todayKey]) appState.absen[todayKey] = {};
+  if(Array.isArray(appState.today[todayKey])){
+    appState.today[todayKey] = { hadir: appState.today[todayKey], absen: [] };
+  }
+  return { key: todayKey, data: appState.today[todayKey], absenMap: appState.absen[todayKey] };
+}
+
+function safeHTML(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+function safeAttr(str){
+  return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderAll(){
+  try {
+    const { data: todayData, absenMap } = getTodayData();
+    const hadirList = todayData.hadir;
+
+    const baninNames = appState.names.filter(p=>p.gender==='banin').sort((a,b)=>a.nama.localeCompare(b.nama,'id'));
+    const banatNames = appState.names.filter(p=>p.gender==='banat').sort((a,b)=>a.nama.localeCompare(b.nama,'id'));
+
+    const gridBanin = document.getElementById('gridBanin');
+    gridBanin.innerHTML = '';
+    baninNames.forEach(p => renderCard(p, gridBanin, hadirList, absenMap, 'banin'));
+
+    const gridBanat = document.getElementById('gridBanat');
+    gridBanat.innerHTML = '';
+    banatNames.forEach(p => renderCard(p, gridBanat, hadirList, absenMap, 'banat'));
+
+    const total = appState.names.length;
+    const hadirBanin = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banin').length;
+    const hadirBanat = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banat').length;
+    const tidakHadir = total - hadirList.length;
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statBanin').textContent = hadirBanin;
+    document.getElementById('statBanat').textContent = hadirBanat;
+    document.getElementById('statTidak').textContent = tidakHadir;
+    document.getElementById('statPersen').textContent = total > 0 ? Math.round((hadirList.length/total)*100) + '%' : '0%';
+
+    const tbBanin = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banin');
+    const elBanin = document.getElementById('tableBanin');
+    if(tbBanin.length===0){
+      elBanin.innerHTML = '<div class="empty-state">Belum ada banin yang hadir.</div>';
+    } else {
+      let html = '<table class="table-banin"><thead><tr><th>No</th><th>Nama</th><th>Waktu</th><th>Status</th><th>Hapus</th></tr></thead><tbody>';
+      tbBanin.forEach((h,i)=>{
+        html += '<tr><td class="td-num">'+(i+1)+'</td><td class="td-name">'+safeHTML(h.nama)+'</td><td class="td-time">'+h.jam+' WIB</td>';
+        html += '<td><span class="badge-hadir badge-banin">🟢 Hadir</span></td>';
+        html += '<td class="td-action" data-act="batal" data-nama="'+safeAttr(h.nama)+'" title="Batalkan">×</td></tr>';
+      });
+      html += '</tbody></table>';
+      elBanin.innerHTML = html;
+    }
+
+    const tbBanat = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banat');
+    const elBanat = document.getElementById('tableBanat');
+    if(tbBanat.length===0){
+      elBanat.innerHTML = '<div class="empty-state">Belum ada banat yang hadir.</div>';
+    } else {
+      let html = '<table class="table-banat"><thead><tr><th>No</th><th>Nama</th><th>Waktu</th><th>Status</th><th>Hapus</th></tr></thead><tbody>';
+      tbBanat.forEach((h,i)=>{
+        html += '<tr><td class="td-num">'+(i+1)+'</td><td class="td-name">'+safeHTML(h.nama)+'</td><td class="td-time">'+h.jam+' WIB</td>';
+        html += '<td><span class="badge-hadir badge-banat">🔵 Hadir</span></td>';
+        html += '<td class="td-action" data-act="batal" data-nama="'+safeAttr(h.nama)+'" title="Batalkan">×</td></tr>';
+      });
+      html += '</tbody></table>';
+      elBanat.innerHTML = html;
+    }
+
+    const tidakBanin = baninNames.filter(p => !hadirList.find(h=>h.nama===p.nama));
+    const elTidakBanin = document.getElementById('tableBaninTidak');
+    if(tidakBanin.length===0){
+      elTidakBanin.innerHTML = '<div class="empty-state">Semua banin hadir.</div>';
+    } else {
+      let html = '<table class="table-tidak"><thead><tr><th>No</th><th>Nama</th><th>Keterangan</th><th>Ubah</th></tr></thead><tbody>';
+      tidakBanin.forEach((p,i)=>{
+        const ket = absenMap[p.nama] || 'Alpha';
+        let badgeClass = ket==='Sakit'?'badge-sakit':(ket==='Izin'?'badge-izin':'badge-alpha');
+        html += '<tr><td class="td-num">'+(i+1)+'</td><td class="td-name">'+safeHTML(p.nama)+'</td>';
+        html += '<td><span class="badge-hadir '+badgeClass+'">'+ket+'</span></td>';
+        html += '<td><select class="ket-select" data-act="ket" data-nama="'+safeAttr(p.nama)+'">';
+        html += '<option value="Alpha"'+(ket==='Alpha'?' selected':'')+'>Alpha</option>';
+        html += '<option value="Sakit"'+(ket==='Sakit'?' selected':'')+'>Sakit</option>';
+        html += '<option value="Izin"'+(ket==='Izin'?' selected':'')+'>Izin</option>';
+        html += '</select></td></tr>';
+      });
+      html += '</tbody></table>';
+      elTidakBanin.innerHTML = html;
+    }
+
+    const tidakBanat = banatNames.filter(p => !hadirList.find(h=>h.nama===p.nama));
+    const elTidakBanat = document.getElementById('tableBanatTidak');
+    if(tidakBanat.length===0){
+      elTidakBanat.innerHTML = '<div class="empty-state">Semua banat hadir.</div>';
+    } else {
+      let html = '<table class="table-tidak"><thead><tr><th>No</th><th>Nama</th><th>Keterangan</th><th>Ubah</th></tr></thead><tbody>';
+      tidakBanat.forEach((p,i)=>{
+        const ket = absenMap[p.nama] || 'Alpha';
+        let badgeClass = ket==='Sakit'?'badge-sakit':(ket==='Izin'?'badge-izin':'badge-alpha');
+        html += '<tr><td class="td-num">'+(i+1)+'</td><td class="td-name">'+safeHTML(p.nama)+'</td>';
+        html += '<td><span class="badge-hadir '+badgeClass+'">'+ket+'</span></td>';
+        html += '<td><select class="ket-select" data-act="ket" data-nama="'+safeAttr(p.nama)+'">';
+        html += '<option value="Alpha"'+(ket==='Alpha'?' selected':'')+'>Alpha</option>';
+        html += '<option value="Sakit"'+(ket==='Sakit'?' selected':'')+'>Sakit</option>';
+        html += '<option value="Izin"'+(ket==='Izin'?' selected':'')+'>Izin</option>';
+        html += '</select></td></tr>';
+      });
+      html += '</tbody></table>';
+      elTidakBanat.innerHTML = html;
+    }
+  } catch(e) {
+    console.error('renderAll error:', e);
+  }
+}
+
+function renderCard(p, container, hadirList, absenMap, gender){
+  const isHadir = hadirList.find(h => h.nama === p.nama);
+  const ket = absenMap[p.nama] || 'Alpha';
+  const card = document.createElement('div');
+  let cls = 'mustami-card';
+  if(gender==='banat') cls += ' banat';
+  if(isHadir) cls += gender==='banat' ? ' checked-banat' : ' checked';
+  else if(ket==='Alpha') cls += ' absen-alpha';
+  else if(ket==='Sakit') cls += ' absen-sakit';
+  else if(ket==='Izin') cls += ' absen-izin';
+  card.className = cls;
+  card.dataset.nama = p.nama;
+
+  let inner = '';
+  inner += '<input type="checkbox" '+(isHadir?'checked':'')+' data-cb="1">';
+  inner += '<span class="m-name">'+safeHTML(p.nama)+'</span>';
+  if(isHadir){
+    inner += '<span class="m-time">'+isHadir.jam+'</span>';
+  } else {
+    inner += '<select class="ket-select" data-ket="1">';
+    inner += '<option value="Alpha"'+(ket==='Alpha'?' selected':'')+'>Alpha</option>';
+    inner += '<option value="Sakit"'+(ket==='Sakit'?' selected':'')+'>Sakit</option>';
+    inner += '<option value="Izin"'+(ket==='Izin'?' selected':'')+'>Izin</option>';
+    inner += '</select>';
+  }
+  inner += '<span class="m-del" data-del="1" title="Hapus">×</span>';
+  card.innerHTML = inner;
+
+  const cb = card.querySelector('input[data-cb="1"]');
+  const sel = card.querySelector('select[data-ket="1"]');
+  const delBtn = card.querySelector('span[data-del="1"]');
+
+  cb.addEventListener('change', function(e){ e.stopPropagation(); toggleHadir(p.nama, this.checked); });
+  if(sel) sel.addEventListener('change', function(e){ e.stopPropagation(); setKeterangan(p.nama, this.value); });
+  if(delBtn) delBtn.addEventListener('click', function(e){ e.stopPropagation(); hapusNama(p.nama); });
+
+  card.addEventListener('click', function(e){
+    if(e.target === cb || e.target === sel || e.target === delBtn) return;
+    cb.checked = !cb.checked;
+    toggleHadir(p.nama, cb.checked);
+  });
+
+  container.appendChild(card);
+}
+
+function tambahNama(){
+  const input = document.getElementById('inputNama');
+  const genderSel = document.getElementById('inputGender');
+  const nama = input.value.trim();
+  const gender = genderSel.value;
+  if(!nama){ showToast('Nama tidak boleh kosong'); return; }
+  if(appState.names.find(p=>p.nama===nama)){ showToast('Nama sudah ada dalam daftar'); return; }
+  appState.names.push({nama: nama, gender: gender});
+  saveState();
+  input.value = '';
+  renderAll();
+  showToast('Nama ' + (gender==='banin'?'Banin':'Banat') + ' ditambahkan');
+}
+
+function toggleHadir(nama, checked){
+  const { key, data, absenMap } = getTodayData();
+  const list = data.hadir;
+  const idx = list.findIndex(h => h.nama === nama);
+  if(checked){
+    if(idx===-1) list.push({nama: nama, jam: formatTime()});
+    delete absenMap[nama];
+  } else {
+    if(idx!==-1) list.splice(idx, 1);
+    if(!absenMap[nama]) absenMap[nama] = 'Alpha';
+  }
+  saveState();
+  renderAll();
+}
+
+function setKeterangan(nama, keterangan){
+  const { key, absenMap } = getTodayData();
+  absenMap[nama] = keterangan;
+  saveState();
+  renderAll();
+  showToast('Keterangan diperbarui: ' + keterangan);
+}
+
+function batalHadir(nama){
+  const { key, data, absenMap } = getTodayData();
+  const idx = data.hadir.findIndex(h => h.nama === nama);
+  if(idx!==-1) data.hadir.splice(idx, 1);
+  saveState();
+  renderAll();
+  showToast('Kehadiran dibatalkan');
+}
+
+function hapusNama(nama){
+  if(!confirm('Yakin hapus "' + nama + '" dari daftar?')) return;
+  appState.names = appState.names.filter(p => p.nama !== nama);
+  const { key, data, absenMap } = getTodayData();
+  data.hadir = data.hadir.filter(h => h.nama !== nama);
+  delete absenMap[nama];
+  saveState();
+  renderAll();
+  showToast('Nama dihapus');
+}
+
+function importDefault(){
+  if(appState.names.length > 0 && !confirm('Timpa daftar existing dengan daftar default?')) return;
+  appState.names = JSON.parse(JSON.stringify(DEFAULT_NAMES));
+  saveState();
+  renderAll();
+  showToast('Daftar default dimuat (25 Banin + 25 Banat)');
+}
+
+function resetHariIni(){
+  if(!confirm('Yakin reset kehadiran hari ini?')) return;
+  const key = getTodayKey();
+  appState.today[key] = { hadir: [], absen: [] };
+  if(appState.absen[key]) appState.absen[key] = {};
+  saveState();
+  renderAll();
+  showToast('Kehadiran hari ini direset');
+}
+
+function resetSemua(){
+  if(!confirm('Yakin hapus SEMUA data?')) return;
+  appState = { names: [], today: {}, absen: {} };
+  saveState();
+  renderAll();
+  showToast('Semua data dihapus');
+}
+
+function exportCSV(){
+  const { data: todayData, absenMap } = getTodayData();
+  const hadirList = todayData.hadir;
+  const todayKey = getTodayKey();
+  if(hadirList.length===0 && appState.names.length===0){ showToast('Tidak ada data untuk di-export'); return; }
+  let csv = 'No,Nama Mustami,Gender,Waktu Hadir,Status,Keterangan\n';
+  hadirList.forEach((h,i)=>{
+    const g = appState.names.find(p=>p.nama===h.nama)?.gender || '-';
+    csv += (i+1)+','+h.nama+','+(g==='banin'?'Banin':'Banat')+','+h.jam+',Hadir,\n';
+  });
+  const tidakHadirList = appState.names.filter(p => !hadirList.find(h=>h.nama===p.nama));
+  tidakHadirList.forEach((p,i)=>{
+    const ket = absenMap[p.nama] || 'Alpha';
+    csv += (hadirList.length+i+1)+','+p.nama+','+(p.gender==='banin'?'Banin':'Banat')+',-,'+ket+','+ket+'\n';
+  });
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'laporan-kehadiran-' + todayKey + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('File CSV berhasil di-download');
+}
+
+// Event delegation for table actions
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('td-action') && e.target.dataset.act === 'batal'){
+    batalHadir(e.target.dataset.nama);
+  }
+});
+document.addEventListener('change', function(e){
+  if(e.target.classList.contains('ket-select') && e.target.dataset.act === 'ket'){
+    setKeterangan(e.target.dataset.nama, e.target.value);
+  }
+});
+
+renderAll();
+</script>
+</body>
+</html>
