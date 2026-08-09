@@ -548,24 +548,20 @@ function switchTab(tab){
 const STORAGE_KEY = 'sigahMustami_L5_v1';
 
 const DEFAULT_NAMES = [
-  {nama:"Ahmad Fauzi", gender:"banin"},{nama:"Budi Santoso", gender:"banin"},{nama:"Candra Wijaya", gender:"banin"},
-  {nama:"Dedi Kurniawan", gender:"banin"},{nama:"Eko Prasetyo", gender:"banin"},{nama:"Fajar Nugroho", gender:"banin"},
-  {nama:"Gunawan", gender:"banin"},{nama:"Hadi Sucipto", gender:"banin"},{nama:"Irfan Maulana", gender:"banin"},
-  {nama:"Joko Susilo", gender:"banin"},{nama:"Kurniawan", gender:"banin"},{nama:"Lukman Hakim", gender:"banin"},
-  {nama:"Mulyadi", gender:"banin"},{nama:"Nur Hidayat", gender:"banin"},{nama:"Oky Firmansyah", gender:"banin"},
-  {nama:"Purnomo", gender:"banin"},{nama:"Qomaruddin", gender:"banin"},{nama:"Rudi Hartono", gender:"banin"},
-  {nama:"Samsul Arifin", gender:"banin"},{nama:"Taufik Hidayat", gender:"banin"},{nama:"Umar Faruq", gender:"banin"},
-  {nama:"Vikri Abdullah", gender:"banin"},{nama:"Wahyu Setiawan", gender:"banin"},{nama:"Yusuf Mansur", gender:"banin"},
-  {nama:"Zainal Abidin", gender:"banin"},
-  {nama:"Aisyah Putri", gender:"banat"},{nama:"Bella Rahma", gender:"banat"},{nama:"Citra Lestari", gender:"banat"},
-  {nama:"Dewi Sartika", gender:"banat"},{nama:"Eka Nuraini", gender:"banat"},{nama:"Fitriani", gender:"banat"},
-  {nama:"Gita Permata", gender:"banat"},{nama:"Hani Fauziah", gender:"banat"},{nama:"Indah Sari", gender:"banat"},
-  {nama:"Jihan Aulia", gender:"banat"},{nama:"Kirana Dewi", gender:"banat"},{nama:"Laila Maghfiroh", gender:"banat"},
-  {nama:"Maya Sari", gender:"banat"},{nama:"Nadia Zahra", gender:"banat"},{nama:"Olivia Putri", gender:"banat"},
-  {nama:"Putri Anggraini", gender:"banat"},{nama:"Qonita Salma", gender:"banat"},{nama:"Rina Amelia", gender:"banat"},
-  {nama:"Siti Aminah", gender:"banat"},{nama:"Tika Ramadhani", gender:"banat"},{nama:"Ulfah Nur", gender:"banat"},
-  {nama:"Vina Maulida", gender:"banat"},{nama:"Winda Ayu", gender:"banat"},{nama:"Yuni Safitri", gender:"banat"},
-  {nama:"Zahra Khairunnisa", gender:"banat"}
+  {nama:"Abdur Rosyid Al Mubarok", gender:"banin"},{nama:"Ade Putra Haq", gender:"banin"},{nama:"Adit Ferdiansyah", gender:"banin"},
+  {nama:"Alkmar Maulana Ahmad", gender:"banin"},{nama:"Aziz Haryo Aji", gender:"banin"},{nama:"Cadas Pekerja Pembebasan", gender:"banin"},
+  {nama:"Carlos Darrel Arrafi", gender:"banin"},{nama:"Difa Fauzan Ubaidillah", gender:"banin"},{nama:"Fahri Azhar", gender:"banin"},
+  {nama:"Hafiz Alkamil", gender:"banin"},{nama:"Iftar Syauqi Fatan", gender:"banin"},{nama:"Kanzi Daffa Fauzan", gender:"banin"},
+  {nama:"Muhammmad Abiyan Adli", gender:"banin"},{nama:"Muhammad Arkan Al Faridzi", gender:"banin"},{nama:"Muhammad Fariz Azhar", gender:"banin"},
+  {nama:"Muhammad Najib Habibullah", gender:"banin"},{nama:"Naufal Rahman Ibrahim", gender:"banin"},{nama:"Noval Zaky Abyan", gender:"banin"},
+  {nama:"Nurkholik Akbar", gender:"banin"},{nama:"Ridwan Setiawan", gender:"banin"},{nama:"Rizky Dwi Ardyansah", gender:"banin"},
+  {nama:"Satria Husni Al Gifary", gender:"banin"},{nama:"Shufwan Riza Alfathan", gender:"banin"},{nama:"Zahran Firdaus", gender:"banin"},
+  {nama:"Alifah Nurrohimah", gender:"banat"},{nama:"Almira Azalia", gender:"banat"},{nama:"Azfa Seyna Asshidiq", gender:"banat"},
+  {nama:"Azka Fazriani", gender:"banat"},{nama:"Difa Askana Ratifa", gender:"banat"},{nama:"Elsa Nabila", gender:"banat"},
+  {nama:"Fika Mazayatus Sholihah", gender:"banat"},{nama:"Firda Aulia Azzahra", gender:"banat"},{nama:"Hulwah Fairus Mufidah", gender:"banat"},
+  {nama:"Keyla Sarifa Putri", gender:"banat"},{nama:"Khoirun Nisa", gender:"banat"},{nama:"Kinata Umara Basyirah", gender:"banat"},
+  {nama:"Nahla Al Widad", gender:"banat"},{nama:"Nur Anis Damia", gender:"banat"},{nama:"Shaffaa Faakhira Abdurrazak", gender:"banat"},
+  {nama:"Shofi Alfathonah", gender:"banat"},{nama:"Wafiq Dhiya Ulhaq", gender:"banat"}
 ];
 
 function loadState(){
@@ -682,7 +678,7 @@ function renderAll(){
       let html = '<table class="table-banat"><thead><tr><th>No</th><th>Nama</th><th>Waktu</th><th>Status</th><th>Hapus</th></tr></thead><tbody>';
       tbBanat.forEach((h,i)=>{
         html += '<tr><td class="td-num">'+(i+1)+'</td><td class="td-name">'+safeHTML(h.nama)+'</td><td class="td-time">'+h.jam+' WIB</td>';
-        html += '<td><span class="badge-hadir badge-banat">🔵 Hadir</span></td>';
+        html += '<td><span class="badge-hadir badge-banat">🟢 Hadir</span></td>';
         html += '<td class="td-action" data-act="batal" data-nama="'+safeAttr(h.nama)+'" title="Batalkan">×</td></tr>';
       });
       html += '</tbody></table>';
