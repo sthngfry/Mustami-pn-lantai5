@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
-<head> <link rel="icon" type="image/png" href="acentral-removebg-preview.png">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Mustami Lantai 5 — Asrama Persahabatan</title>
+<title>KEHADIRAN Mustami Lantai 5 — Asrama Persahabatan</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
   :root{
     --glass-bg:rgba(255,255,255,0.78);
@@ -37,8 +38,6 @@
     padding:28px 20px 60px; min-height:100vh;
   }
   .wrap{max-width:1200px; margin:0 auto;}
-
-  /* HEADER */
   header{
     text-align:center; padding-bottom:20px; margin-bottom:16px;
   }
@@ -62,8 +61,6 @@
     border:1px solid var(--glass-border); padding:6px 16px; border-radius:24px;
     backdrop-filter:blur(12px); box-shadow:var(--glass-shadow);
   }
-
-  /* TAB NAV */
   .tab-nav{
     display:flex; justify-content:center; gap:8px; margin-bottom:24px; flex-wrap:wrap;
   }
@@ -79,12 +76,9 @@
     background:var(--glass-bg); color:var(--ink);
     box-shadow:var(--glass-shadow); border:1px solid var(--glass-border);
   }
-
   .tab-panel{display:none;}
   .tab-panel.active{display:block; animation:fadeIn .4s ease;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
-
-  /* GLASS */
   .glass{
     background:var(--glass-bg); border:1px solid var(--glass-border);
     border-radius:18px; padding:22px;
@@ -94,7 +88,6 @@
     font-family:'Space Grotesk', sans-serif; font-weight:700;
     color:var(--ink); margin-bottom:14px; display:flex; align-items:center; gap:8px;
   }
-
   .section-label{
     font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.12em;
     text-transform:uppercase; color:rgba(255,255,255,0.6); margin:28px 0 12px;
@@ -102,7 +95,7 @@
   }
   .section-label::after{content:''; flex:1; height:1px; background:rgba(255,255,255,0.2);}
 
-  /* ====== ORGANIGRAM ====== */
+  /* ORGANIGRAM */
   .org-wrap{display:flex; flex-direction:column; align-items:center; position:relative;}
   .org-card{
     background:var(--glass-bg); border:1px solid var(--glass-border);
@@ -158,7 +151,7 @@
   .quote-box p{font-family:'Space Grotesk'; font-size:17px; font-weight:600; color:rgba(255,255,255,0.9); font-style:italic; line-height:1.6;}
   .quote-box span{display:block; margin-top:8px; color:rgba(255,255,255,0.5); font-size:12px; font-family:'IBM Plex Mono';}
 
-  /* ====== KEHADIRAN ====== */
+  /* KEHADIRAN */
   .form-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center;}
   .form-row input, .form-row select{
     padding:12px 16px; border-radius:14px;
@@ -169,7 +162,6 @@
   .form-row input{flex:1; min-width:180px;}
   .form-row input:focus, .form-row select:focus{border-color:var(--green); background:#fff; box-shadow:0 0 0 4px var(--green-glow);}
   .form-row select{width:140px; cursor:pointer;}
-
   .btn{
     padding:12px 22px; border-radius:14px; font-family:'IBM Plex Sans', sans-serif;
     font-size:14px; font-weight:700; cursor:pointer; transition:all .2s;
@@ -185,7 +177,6 @@
   .btn-red:hover{transform:translateY(-2px);}
   .btn-sec{background:rgba(255,255,255,0.6); color:var(--ink-soft); border:1px solid rgba(0,0,0,0.1);}
   .btn-sec:hover{background:#fff;}
-
   .kehadiran-stats-row{
     display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-bottom:20px;
   }
@@ -195,7 +186,6 @@
   }
   .kehadiran-stat-box .stat-num{font-family:'Space Grotesk'; font-size:22px; font-weight:700;}
   .kehadiran-stat-box .stat-label{font-size:11px; color:var(--ink-soft); margin-top:4px;}
-
   .gender-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
   .gender-panel{
     background:rgba(255,255,255,0.5); border:1px solid rgba(0,0,0,0.06);
@@ -207,7 +197,6 @@
   }
   .gender-panel.banin h4{color:var(--green);}
   .gender-panel.banat h4{color:var(--blue);}
-
   .mustami-grid{
     display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;
   }
@@ -222,7 +211,6 @@
   .mustami-card.absen-alpha{background:rgba(183,28,28,0.06); border-color:rgba(183,28,28,0.15);}
   .mustami-card.absen-sakit{background:rgba(230,81,0,0.06); border-color:rgba(230,81,0,0.15);}
   .mustami-card.absen-izin{background:rgba(106,27,154,0.06); border-color:rgba(106,27,154,0.15);}
-
   .mustami-card input[type="checkbox"]{
     width:20px; height:20px; accent-color:var(--green); flex-shrink:0; cursor:pointer;
   }
@@ -240,7 +228,6 @@
   }
   .mustami-card:hover .m-del{opacity:0.6;}
   .mustami-card:hover .m-del:hover{opacity:1;}
-
   table{width:100%; border-collapse:collapse; font-size:13px;}
   thead th{
     text-align:left; font-family:'IBM Plex Mono', monospace; font-weight:600;
@@ -268,16 +255,13 @@
   .td-time{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:12px;}
   .td-action{cursor:pointer; color:var(--red); font-size:18px; opacity:0.6; transition:opacity .2s;}
   .td-action:hover{opacity:1;}
-
   .laporan-split{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
   .laporan-panel{background:rgba(255,255,255,0.4); border-radius:14px; padding:16px;}
   .laporan-panel h4{font-family:'Space Grotesk', sans-serif; font-size:14px; font-weight:700; margin-bottom:12px;}
   .laporan-panel.banin-lap h4{color:var(--green);}
   .laporan-panel.banat-lap h4{color:var(--blue);}
   .laporan-panel.tidak-lap h4{color:var(--red);}
-
   .empty-state{text-align:center; padding:30px 16px; color:var(--ink-soft); font-size:13px;}
-
   .toast-container{position:fixed; top:20px; right:20px; z-index:1000; display:flex; flex-direction:column; gap:10px;}
   .toast{
     background:var(--ink); color:#fff; padding:14px 20px; border-radius:14px;
@@ -286,9 +270,7 @@
   }
   .toast.success{background:var(--green);}
   @keyframes slideIn{from{opacity:0; transform:translateX(50px);} to{opacity:1; transform:translateX(0);}}
-
   footer{margin-top:40px; text-align:center; color:rgba(255,255,255,0.45); font-size:12px;}
-
   @media(max-width:900px){
     .gender-grid{grid-template-columns:1fr;}
     .laporan-split{grid-template-columns:1fr;}
@@ -309,23 +291,19 @@
 </head>
 <body>
 <div class="wrap">
-
   <header>
     <div class="brand-mark">🕌</div>
-    <h1>MUSTAMI PERSAHABATAN LANTAI 5 ACENTRAL</h1>
-    <p class="subtitle">Asrama Persahabatan — Stuktural & Kehadiran</p>
-    <div class="asrama-badge">📍 Lantai 5 — Tahun Pembelajaran 2026/2027</div>
+    <h1> KEHADIRAN KEMUSTAMIAN PERSAHABATAN LANTAI 5 - ANGKATAN ACENTRAL</h1>
+    <p class="subtitle">Asrama Persahabatan — Lantai 5</p>
+    <div class="asrama-badge">📍 Persahabatan — Tahun Akademik 2026/2027</div>
   </header>
-
-  <!-- TAB NAVIGATION -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab('struktural')" id="tab-struktural">🏛️ Struktural</button>
     <button class="tab-btn" onclick="switchTab('kehadiran')" id="tab-kehadiran">📋 Kehadiran</button>
   </div>
 
-  <!-- ====== PANEL STRUKTURAL ====== -->
+  <!-- STRUKTURAL PANEL -->
   <div class="tab-panel active" id="panel-struktural">
-
     <div class="section-label">Struktur Organisasi</div>
     <div class="glass">
       <div class="org-wrap">
@@ -418,39 +396,23 @@
         </div>
       </div>
     </div>
-
     <div class="section-label">Ringkasan Struktural</div>
     <div class="glass">
       <div class="stats-row">
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--gold);">10</div>
-          <div class="stat-label">Total Pengurus</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--green);">5</div>
-          <div class="stat-label">Bidang</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--red);">4</div>
-          <div class="stat-label">Kedisiplinan</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num" style="color:var(--purple);">2</div>
-          <div class="stat-label">Kurikulum</div>
-        </div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--gold);">10</div><div class="stat-label">Total Pengurus</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--green);">5</div><div class="stat-label">Bidang</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--red);">4</div><div class="stat-label">Kedisiplinan</div></div>
+        <div class="stat-box"><div class="stat-num" style="color:var(--purple);">2</div><div class="stat-label">Kurikulum</div></div>
       </div>
     </div>
-
     <div class="quote-box">
       <p>"Bersama-sama kita membangun suasana keilmuan dan keakraban di Lantai 5 Asrama Persahabatan."</p>
       <span>— STRUKTURAL MUSTAMI LANTAI 5</span>
     </div>
-
   </div>
 
-  <!-- ====== PANEL KEHADIRAN ====== -->
+  <!-- KEHADIRAN PANEL -->
   <div class="tab-panel" id="panel-kehadiran">
-
     <div class="glass">
       <h3>➕ Tambah Nama Mustami</h3>
       <div class="form-row">
@@ -467,8 +429,7 @@
         <button class="btn btn-sec" onclick="resetSemua()">🗑️ Hapus Semua Data</button>
       </div>
     </div>
-
-    <div class="section-label">Daftar Mustami — Centang yang Hadir, Pilih Keterangan jika Tidak Hadir</div>
+    <div class="section-label">Daftar Mustami — Centang yang Hadir, Beri Keterangan jika Tidak Hadir</div>
     <div class="glass">
       <div class="kehadiran-stats-row">
         <div class="kehadiran-stat-box stat-total"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Mustami</div></div>
@@ -488,14 +449,14 @@
         </div>
       </div>
     </div>
-
     <div class="section-label">Laporan Kehadiran Hari Ini</div>
     <div class="glass">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
         <h3 style="margin:0;">📋 Tabel Kehadiran</h3>
-        <div style="display:flex; gap:8px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn btn-gold" onclick="window.print()">🖨️ Print</button>
           <button class="btn btn-sec" onclick="exportCSV()">📄 Export CSV</button>
+          <button class="btn btn-blue" onclick="exportExcel()">📊 Export Excel</button>
         </div>
       </div>
       <div class="laporan-split">
@@ -509,7 +470,6 @@
         </div>
       </div>
     </div>
-
     <div class="section-label">Laporan Tidak Hadir</div>
     <div class="glass">
       <div class="laporan-split">
@@ -523,17 +483,13 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <footer>
-    SIGAH Mustami Lantai 5 · Asrama Persahabatan · Data tersimpan otomatis di browser
+     Kemustami Lantai 5 · Asrama Persahabatan · Data tersimpan otomatis di browser
   </footer>
-
 </div>
-
 <div class="toast-container" id="toastContainer"></div>
-
 <script>
 // ====== TAB SWITCHING ======
 function switchTab(tab){
@@ -882,6 +838,157 @@ function exportCSV(){
   a.click();
   URL.revokeObjectURL(url);
   showToast('File CSV berhasil di-download');
+}
+
+// ====== EXPORT EXCEL ======
+function exportExcel(){
+  const { data: todayData, absenMap } = getTodayData();
+  const hadirList = todayData.hadir;
+  const todayKey = getTodayKey();
+  const tanggalStr = formatDate();
+
+  if(appState.names.length===0){ showToast('Tidak ada data untuk di-export'); return; }
+
+  const wb = XLSX.utils.book_new();
+  wb.Props = {
+    Title: "Laporan Kehadiran Mustami Lantai 5",
+    Subject: "Kehadiran Majelis Taklim",
+    Author: "SIGAH Mustami",
+    CreatedDate: new Date()
+  };
+
+  // --- Sheet 1: Yang Hadir ---
+  const hadirData = [
+    ["LAPORAN KEHADIRAN MUSTAMI LANTAI 5"],
+    ["Tanggal: " + tanggalStr],
+    [""],
+    ["No", "Nama Mustami", "Gender", "Waktu Hadir", "Status"]
+  ];
+  hadirList.forEach((h, i) => {
+    const g = appState.names.find(p=>p.nama===h.nama)?.gender || '-';
+    hadirData.push([i+1, h.nama, g==='banin'?'Banin':'Banat', h.jam + ' WIB', 'Hadir']);
+  });
+  if(hadirList.length===0){
+    hadirData.push(["", "Belum ada yang hadir", "", "", ""]);
+  }
+
+  const wsHadir = XLSX.utils.aoa_to_sheet(hadirData);
+  // Styling header row (row 4 = index 3)
+  const headerRange = XLSX.utils.decode_range(wsHadir['!ref']);
+  for(let C = headerRange.s.c; C <= headerRange.e.c; C++){
+    const cellAddr = XLSX.utils.encode_cell({r:3, c:C});
+    if(!wsHadir[cellAddr]) continue;
+    wsHadir[cellAddr].s = {
+      font: { bold: true, color: {rgb: "FFFFFF"}, sz: 12 },
+      fill: { patternType: "solid", fgColor: {rgb: "1B5E20"} },
+      alignment: { horizontal: "center", vertical: "center" },
+      border: { top: {style:"thin"}, bottom: {style:"thin"}, left: {style:"thin"}, right: {style:"thin"} }
+    };
+  }
+  // Title styling
+  if(wsHadir['A1']){
+    wsHadir['A1'].s = { font: { bold: true, sz: 14, color: {rgb: "1B5E20"} }, alignment: { horizontal: "center" } };
+  }
+  // Column widths
+  wsHadir['!cols'] = [{wch:6}, {wch:28}, {wch:12}, {wch:16}, {wch:12}];
+  XLSX.utils.book_append_sheet(wb, wsHadir, "Yang Hadir");
+
+  // --- Sheet 2: Yang Tidak Hadir ---
+  const tidakHadirList = appState.names.filter(p => !hadirList.find(h=>h.nama===p.nama));
+  const tidakData = [
+    ["LAPORAN TIDAK HADIR MUSTAMI LANTAI 5"],
+    ["Tanggal: " + tanggalStr],
+    [""],
+    ["No", "Nama Mustami", "Gender", "Keterangan", "Status"]
+  ];
+  tidakHadirList.forEach((p, i) => {
+    const ket = absenMap[p.nama] || 'Alpha';
+    tidakData.push([i+1, p.nama, p.gender==='banin'?'Banin':'Banat', ket, 'Tidak Hadir']);
+  });
+  if(tidakHadirList.length===0){
+    tidakData.push(["", "Semua mustami hadir", "", "", ""]);
+  }
+
+  const wsTidak = XLSX.utils.aoa_to_sheet(tidakData);
+  const headerRange2 = XLSX.utils.decode_range(wsTidak['!ref']);
+  for(let C = headerRange2.s.c; C <= headerRange2.e.c; C++){
+    const cellAddr = XLSX.utils.encode_cell({r:3, c:C});
+    if(!wsTidak[cellAddr]) continue;
+    wsTidak[cellAddr].s = {
+      font: { bold: true, color: {rgb: "FFFFFF"}, sz: 12 },
+      fill: { patternType: "solid", fgColor: {rgb: "B71C1C"} },
+      alignment: { horizontal: "center", vertical: "center" },
+      border: { top: {style:"thin"}, bottom: {style:"thin"}, left: {style:"thin"}, right: {style:"thin"} }
+    };
+  }
+  if(wsTidak['A1']){
+    wsTidak['A1'].s = { font: { bold: true, sz: 14, color: {rgb: "B71C1C"} }, alignment: { horizontal: "center" } };
+  }
+  wsTidak['!cols'] = [{wch:6}, {wch:28}, {wch:12}, {wch:14}, {wch:14}];
+  XLSX.utils.book_append_sheet(wb, wsTidak, "Tidak Hadir");
+
+  // --- Sheet 3: Ringkasan ---
+  const total = appState.names.length;
+  const hadirBanin = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banin').length;
+  const hadirBanat = hadirList.filter(h => appState.names.find(p=>p.nama===h.nama)?.gender==='banat').length;
+  const tidakHadir = total - hadirList.length;
+  const persen = total > 0 ? Math.round((hadirList.length/total)*100) + '%' : '0%';
+
+  const ringkasanData = [
+    ["RINGKASAN KEHADIRAN MUSTAMI LANTAI 5"],
+    ["Tanggal: " + tanggalStr],
+    [""],
+    ["Keterangan", "Jumlah"],
+    ["Total Mustami", total],
+    ["Banin Hadir", hadirBanin],
+    ["Banat Hadir", hadirBanat],
+    ["Total Hadir", hadirList.length],
+    ["Tidak Hadir", tidakHadir],
+    ["Persentase Kehadiran", persen]
+  ];
+
+  const wsRing = XLSX.utils.aoa_to_sheet(ringkasanData);
+  const headerRange3 = XLSX.utils.decode_range(wsRing['!ref']);
+  for(let C = headerRange3.s.c; C <= headerRange3.e.c; C++){
+    const cellAddr = XLSX.utils.encode_cell({r:3, c:C});
+    if(!wsRing[cellAddr]) continue;
+    wsRing[cellAddr].s = {
+      font: { bold: true, color: {rgb: "FFFFFF"}, sz: 12 },
+      fill: { patternType: "solid", fgColor: {rgb: "1565C0"} },
+      alignment: { horizontal: "center", vertical: "center" },
+      border: { top: {style:"thin"}, bottom: {style:"thin"}, left: {style:"thin"}, right: {style:"thin"} }
+    };
+  }
+  // Style data rows
+  for(let R = 4; R <= 8; R++){
+    for(let C = 0; C <= 1; C++){
+      const cellAddr = XLSX.utils.encode_cell({r:R, c:C});
+      if(!wsRing[cellAddr]) continue;
+      wsRing[cellAddr].s = {
+        border: { top: {style:"thin"}, bottom: {style:"thin"}, left: {style:"thin"}, right: {style:"thin"} },
+        alignment: { horizontal: C===0?"left":"center", vertical: "center" }
+      };
+    }
+  }
+  // Highlight persentase row
+  const persenAddr = XLSX.utils.encode_cell({r:8, c:1});
+  if(wsRing[persenAddr]){
+    wsRing[persenAddr].s = {
+      font: { bold: true, color: {rgb: "C8A415"}, sz: 13 },
+      fill: { patternType: "solid", fgColor: {rgb: "FFF8E1"} },
+      border: { top: {style:"thin"}, bottom: {style:"thin"}, left: {style:"thin"}, right: {style:"thin"} },
+      alignment: { horizontal: "center", vertical: "center" }
+    };
+  }
+  if(wsRing['A1']){
+    wsRing['A1'].s = { font: { bold: true, sz: 14, color: {rgb: "1565C0"} }, alignment: { horizontal: "center" } };
+  }
+  wsRing['!cols'] = [{wch:28}, {wch:20}];
+  XLSX.utils.book_append_sheet(wb, wsRing, "Ringkasan");
+
+  // Save file
+  XLSX.writeFile(wb, 'laporan-kehadiran-' + todayKey + '.xlsx');
+  showToast('File Excel berhasil di-download');
 }
 
 // Event delegation for table actions
